@@ -7,25 +7,30 @@ spec:
 
 ---
 
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: selfsigned-cert
-  namespace: default
+  name: my-selfsigned-ca
+  namespace: keycloak
 spec:
-  secretName: selfsigned-cert-tls
-  duration: 2880h # 120d
-  renewBefore: 360h # 15d
-  commonName: selfsigned-cert
-  isCA: false
-  keySize: 2048
-  keyAlgorithm: rsa
-  keyEncoding: pkcs1
-  usages:
-    - digital signature
-    - key encipherment
-    - server auth
+  isCA: true
+  commonName: my-selfsigned-ca
+  secretName: root-secret
+  privateKey:
+    algorithm: ECDSA
+    size: 256
   issuerRef:
     name: selfsigned-issuer
     kind: ClusterIssuer
     group: cert-manager.io
+    
+---
+
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: my-ca-issuer
+  namespace: keycloak
+spec:
+  ca:
+    secretName: root-secret
