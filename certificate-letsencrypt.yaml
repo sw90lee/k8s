@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: wildcard-certificate
+  namespace: backend
+spec:
+  secretName: doks-starter-kit.page
+  issuerRef:
+    name: letsencrypt-dev-wcard
+    kind: Issuer
+    group: cert-manager.io
+  commonName: "*.doks-starter-kit.page"
+  dnsNames:
+    - "doks-starter-kit.page"
+    - "*.doks-starter-kit.page"
