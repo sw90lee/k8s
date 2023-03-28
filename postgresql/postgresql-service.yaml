@@ -4,10 +4,11 @@ metadata:
   name: postgres-service-np
   namespace: keycloak
 spec:
-  type: ClusterIp
+  type: ClusterIP
   selector:
     app: psql
   ports:
+
     - name: psql
       port: 5432        # Cluster IP http://10.109.199.234:port (docker exposed port)
       protocol: TCP      
