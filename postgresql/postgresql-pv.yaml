@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: keycloak-pv
+  namespace: default
+spec:
+  persistentVolumeReclaimPolicy: Retain  # PVC가 해제되면 해당 용량은 삭제 하도록 정책
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 172.30.10.21
+    path: /volume1/CloudHQ-Infra-Kubernetes/keycloak

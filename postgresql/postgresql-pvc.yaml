@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pg-pvc
+spec:
+  selector:
+    matchLabels:  #Select a volume with this labels
+      app: psql
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
