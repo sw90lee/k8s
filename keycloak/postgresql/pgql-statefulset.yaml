@@ -11,7 +11,6 @@ spec:
   selector:
     matchLabels:
       app: postgres
-  serviceName: nfs-pod-provisioner-sa # Stoargeclass nfs Account
   template:
     metadata:
       labels:
@@ -61,9 +60,7 @@ spec:
       partition: 0
     type: RollingUpdate
   volumeClaimTemplates:
-  - apiVersion: v1
-    kind: PersistentVolumeClaim
-    metadata:
+  - metadata:
       name: postgres-pvc
       labels:
         app: postgres
@@ -72,8 +69,8 @@ spec:
       - ReadWriteOnce
       resources:
         requests:
-          storage: 1Gi
-      storageClassName: postgres-sc
+          storage: 10Gi
+      storageClassName: nfs-client
 ---
 apiVersion: v1
 kind: Service

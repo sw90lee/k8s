@@ -4,7 +4,7 @@ metadata:
   name: pgql-keycloak
   namespace: keycloak
 spec:
-  storageClassName: nfs-storageclass
+  storageClassName: nfs-client
   accessModes:
     - ReadWriteOnce
   resources:
