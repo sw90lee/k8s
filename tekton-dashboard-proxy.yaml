@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tekton-dashboard-proxy
+  namespace: k8s-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tekton-dashboard-proxy
+  template:
+    metadata:
+      labels:
+        app: tekton-dashboard-proxy
+    spec:
+      containers:
+      - image: quay.io/gambol99/keycloak-proxy
+        name: tekton-dashboard-proxy
+        args:
+          - --listen=0.0.0.0:3000
+          - --discovery-url=https://keycloak.icnp.in-soft.co.kr/realms/master
+          - --client-id=tekton
+          - --client-secret=9aWMP3t1jqtZ6I4QyXRu5zUVoj0JqEMJ
+          - --redirection-url=https://tekton-auth.icnp.in-soft.co.kr
+          - --enable-refresh-tokens=true
+          - --encryption-key=MsVRjD36bfAxfBvHUKUjXOTPXaItDThn    # 32 bytes string
+          - --upstream-url=https://tekton-dashboard.tekton-pipelines.svc:9097
+          - --resources=uri=/*
+          - --enable-token-header=false
+        ports:
+          - containerPort: 3000
+            name: web
+        livenessProbe:
+          httpGet:
+            path: /oauth/health
+            port: 3000
+          initialDelaySeconds: 3
+          timeoutSeconds: 2
+        readinessProbe:
+          httpGet:
+            path: /oauth/health
+            port: 3000
+          initialDelaySeconds: 3
+          timeoutSeconds: 2
