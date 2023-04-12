@@ -18,9 +18,9 @@ spec:
         name: tekton-dashboard-proxy
         args:
           - --listen=0.0.0.0:3000
-          - --discovery-url=https://keycloak.icnp.in-soft.co.kr/realms/master
+          - --discovery-url=https://keycloak.icnp.in-soft.co.kr/realms/master/.well-known/openid-configuration
           - --client-id=tekton
-          - --client-secret=9aWMP3t1jqtZ6I4QyXRu5zUVoj0JqEMJ
+          - --client-secret=9aWMP3t1jqt.......oj0JqEMJ
           - --redirection-url=https://tekton-auth.icnp.in-soft.co.kr
           - --enable-refresh-tokens=true
           - --encryption-key=MsVRjD36bfAxfBvHUKUjXOTPXaItDThn    # 32 bytes string
