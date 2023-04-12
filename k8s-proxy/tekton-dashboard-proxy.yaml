@@ -25,7 +25,7 @@ spec:
           - --enable-refresh-tokens=true
           - --encryption-key=MsVRjD36bfAxfBvHUKUjXOTPXaItDThn    # 32 bytes string
           - --upstream-url=https://tekton-dashboard.tekton-pipelines.svc:9097
-          - --resources-uri=/*
+          - --resources=uri=/*
           - --enable-token-header=false
         ports:
           - containerPort: 3000
